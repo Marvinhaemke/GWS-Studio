@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#244f3e">
+  <meta name="description" content="Anmeldung bei GWS Studio, dem Marketing-Workspace von Global Wealth Strategists.">
+  <title>Anmelden · GWS Studio</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/login.css">
+  <script src="/login.js" defer></script>
+</head>
+<body>
+  <main class="login-layout">
+    <section class="studio-panel" aria-labelledby="studio-heading">
+      <a class="brand" href="/login" aria-label="GWS Studio Anmeldung">
+        <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none"><path d="M6 22V11h5v11m4 0V5h5v17m4 0v-7h-4" stroke="currentColor" stroke-width="3"/></svg></span>
+        <span>GWS <span class="brand-light">Studio</span></span>
+      </a>
+      <div class="studio-message">
+        <p class="eyebrow"><span></span>CREATE. COLLABORATE. GROW.</p>
+        <h1 id="studio-heading">Gute Ideen.<br>Gemeinsam weiter.</h1>
+        <p class="studio-description">Ein Ort für dein Team, eure Inhalte und den nächsten großen Gedanken.</p>
+        <div class="studio-illustration" aria-hidden="true">
+          <div class="illustration-orbit"></div>
+          <div class="mini-card card-back"><span class="mini-label">IN BEARBEITUNG</span><span class="mini-line"></span><span class="mini-line short"></span><span class="mini-avatar">GWS</span></div>
+          <div class="mini-card card-front"><span class="mini-label green">BEREIT FÜR DEN NÄCHSTEN SCHRITT</span><span class="mini-title">Eine neue Perspektive.</span><span class="mini-line"></span><span class="card-progress"><span></span></span><span class="card-done"><svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+          <span class="little-spark">✳</span>
+        </div>
+      </div>
+      <p class="studio-footer">GLOBAL WEALTH STRATEGISTS</p>
+    </section>
+    <section class="form-panel" aria-labelledby="login-heading">
+      <div class="login-card">
+        <p class="form-eyebrow">DEIN KREATIVER WORKSPACE</p>
+        <h2 id="login-heading">Willkommen im Studio.</h2>
+        <p class="form-subtitle">Melde dich mit deinem GWS-Studio-Zugang an.</p>
+        <div id="login-status" class="login-status" role="status" aria-live="polite">Verbindung zum Studio wird geprüft …</div>
+        <div id="login-setup" class="setup-state" hidden>
+          <span class="setup-icon" aria-hidden="true">✳</span>
+          <h3>Das Studio wird eingerichtet.</h3>
+          <p>Die Anmeldung ist noch nicht vollständig konfiguriert. Bitte wende dich an die Person, die euer Studio einrichtet.</p>
+        </div>
+        <form id="login-form" hidden>
+          <label for="login-email">E-Mail-Adresse</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" inputmode="email" required maxlength="254" placeholder="name@unternehmen.de" disabled>
+          <label for="login-password">Passwort</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" required maxlength="128" placeholder="Dein Passwort" disabled>
+          <p id="login-error" class="login-error" role="alert" aria-live="assertive" hidden></p>
+          <button id="login-submit" class="login-submit" type="submit" disabled><span id="login-submit-text">Im Studio anmelden</span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </form>
+        <button id="login-retry" class="login-retry" type="button" hidden>Verbindung erneut prüfen</button>
+        <p class="access-note">Noch keinen Zugang? Wende dich an deinen Studio-Administrator.</p>
+      </div>
+      <p class="form-footer">GWS Studio <span>·</span> Global Wealth Strategists</p>
+    </section>
+  </main>
+</body>
+</html>
