@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.dev.vars*
+.gws-runtime/
+.sites-runtime/
+node_modules/
+dist/
+outputs/
+*.tar.gz
