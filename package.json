@@ -1,0 +1,14 @@
+{
+  "name": "gws-studio",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "GWS Studio with native Frame.io V4 video review",
+  "engines": {"node": ">=24"},
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env server/dev.mjs",
+    "start": "node --env-file-if-exists=.env server/dev.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs"
+  }
+}
