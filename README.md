@@ -1,21 +1,31 @@
 # GWS Studio
 
-Marketing-Workspace für Global Wealth Strategists. Editing-Kanban, Aufgaben, Teamchat-Demo, Paid Copy Library, Organic und Sales mit Setting/Closing.
+Marketing workspace for Global Wealth Strategists with Editing, Paid, Organic and Sales boards, plus native Frame.io V4 reviews.
 
-## Frame.io-Review
+## Hosting
 
-Der neue Reviewbereich verbindet echte Frame.io-V4-Dateien über eine serverseitige API: Video, Versionen, zeitbezogene Kommentare, Kommentarabschluss und Aktualisierung. Ohne konfigurierte Adobe-Verbindung werden keine Live-Daten vorgetäuscht.
+The project targets **Vercel Node.js Functions** and **Neon Postgres**. The existing static interface is served from `public/`; `api/studio.js` handles Studio login and Frame.io API requests. No Cloudflare/Sites headers, D1 bindings, SQLite database, or persistent local server are needed in production.
 
-**Start:** Node.js24 oder neuer installieren, `.env.example` als `.env` kopieren und `npm start` ausführen. Keine npm-Abhängigkeiten erforderlich.
+The Vercel project is `gws-studio` in `marvin-hamkes-projects-c4baca5d`. Connect the existing Neon resource to that project; installing Neon in the team alone does not supply a database to this app. Setup steps are in [VERCEL-SETUP.md](VERCEL-SETUP.md).
 
-**Einrichtung und Grenzen:** [FRAMEIO-SETUP.md](FRAMEIO-SETUP.md). Für Live-Zugriff fehlen die eigenen Adobe-OAuth-Einstellungen. Eine HTTPS-Serverbereitstellung benötigt zusätzlich eine vertrauenswürdige Studio-Anmeldung und eine Sitzungsdatenbank; im Sites-Worker wird dafür D1 unter `DB` verwendet.
+## Development
 
-**Prüfen:** `npm test` · `npm run build`.
+Use Node.js24. Run `npm install`, link the intended Vercel project, pull the development environment, and verify the database and secrets before migrations or starting the server:
 
-- `public/`: bestehende Oberfläche plus nativer Frame.io-Client.
-- `server/`: OAuth, API-Adapter, verschlüsselte Sitzungsspeicherung, lokale Laufzeit und optionaler Webhook-Relay.
-- `worker/`: produktive Worker-Laufzeit mit Sites-Identität.
-- `tests/`: kontrollierte API- und Laufzeittests.
-- `dist/`: generierter Worker; nicht als statischen Ordner ausliefern.
+```sh
+vercel link --scope marvin-hamkes-projects-c4baca5d --project gws-studio
+vercel env pull .env.local --yes --scope marvin-hamkes-projects-c4baca5d
+npm run db:migrate -- --confirm-environment
+npm run user:create -- --email you@example.com --name "Your Name"
+npm run dev
+```
 
-Aufgaben und Demo-Chat bleiben wie bisher im jeweiligen Browser. Frame.io-Tokens werden ausschließlich serverseitig gespeichert. Die HTML-Einzeldatei zeigt den Prototyp, kann allein aber keine Server-API bereitstellen.
+`user:create` reads the password twice from hidden input. Public registration is disabled. `npm test` and `npm run build` do not require live database access and do not run migrations.
+
+## What is stored where
+
+- Neon: Studio accounts, login sessions, rate limits, encrypted Frame.io tokens, temporary OAuth state, webhook events, and duplicate-write protection.
+- Frame.io: videos, versions, and review comments.
+- Browser-local prototype state: tasks, role previews, and demo chat. These remain a prototype rather than shared team records or production role permissions.
+
+Frame.io setup is in [FRAMEIO-SETUP.md](FRAMEIO-SETUP.md). No live Adobe credentials are included.
